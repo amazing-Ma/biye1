@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.PartTimeJobMapper">
+
+    <select id="getJobCountInt" resultType="java.lang.Integer">
+        select count(*) from part_time_job ptj  where is_deleted = 0 and job_creater  = #{id} and current_progress = 2
+    </select>
+    <select id="getJobByCreater" resultType="com.example.demo.eneity.PartTimeJob">
+        select * from part_time_job ptj where job_creater  = #{id} and current_progress  = 2 and is_deleted =0
+    </select>
+</mapper>

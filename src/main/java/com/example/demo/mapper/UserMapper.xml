@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <select id="findUser" parameterType="com.example.demo.eneity.User" resultType="com.example.demo.eneity.User">
+        select
+            *
+        from
+            `user` u
+        where
+            u.user_number = #{user.userNumber}
+          and u.is_deleted = 0
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="com.example.demo.eneity.User">
+        select
+            *
+        from
+            `user` u
+        where
+            u.id = #{id}
+          and u.is_deleted = 0
+    </select>
+    <select id="getUserId" resultType="java.lang.String">
+        select user_id  from user_job uj  where uj.job_id =#{jobId}
+    </select>
+    <select id="getAll" resultType="com.example.demo.eneity.User">
+        select  * from user where is_deleted = 0
+    </select>
+
+</mapper>

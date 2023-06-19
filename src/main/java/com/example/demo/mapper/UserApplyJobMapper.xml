@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.UserApplyJobMapper">
+
+    <select id="getJob" resultType="com.example.demo.eneity.UserJob">
+        select * from user_job where user_id = #{userId} and job_id = #{jobId}
+    </select>
+    <select id="getRecord" resultType="com.example.demo.VO.JobRecord">
+        select
+            ptj .id ,
+            ptj .create_time ,
+            ptj .title ,
+            ptj .start_time ,
+            ptj .end_time ,
+            ptj .job_count ,
+            ptj .work_space ,
+            ptj .job_detail,
+            uj.receive_state as receiveState
+        from
+            part_time_job ptj left join user_job uj on uj.job_id  = ptj.id
+        where  uj.user_id =#{userId}
+        <if test="receiveState == 0"> and uj.receive_state in (0,1,2) </if>
+        <if test="receiveState != 0"> and uj.receive_state in #{receiveState} </if>
+          and uj.is_deleted =0
+    </select>
+    <select id="getJobRecordUser" resultType="com.example.demo.eneity.User">
+        select * from user where
+           id in
+           <foreach collection="userId" item="item"  open="(" separator="," close=")">
+               #{item}
+           </foreach>
+
+        and is_deleted = 0
+    </select>
+    <select id="getUserJob" resultType="com.example.demo.eneity.UserJob">
+        select * from user_job where user_id = #{userId} and job_id = #{jobId} and is_deleted = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,61 @@
+
+#端口号8080
+server:
+  port: 8080
+
+redis:
+#数据库索引
+database: 0
+host: 127.0.0.1
+port: 6379
+password:
+jedis:
+pool:
+#最大连接数
+max-active: 8
+#最大阻塞等待时间(负数表示没限制)
+max-wait: -1
+#最大空闲
+max-idle: 8
+#最小空闲
+min-idle: 0
+#连接超时时间
+timeout: 10000
+#数据库名：mysql，用户名root，密码123456
+spring:
+  mail:
+    host: smtp.qq.com #邮件服务器地址
+    port: 465 #端口号
+    username: 3117790857@qq.com
+    password: emsfblnnukpwddde
+    default-encoding: UTF-8 #默认编码格式
+    properties:
+      mail:
+        debug: true #启动debug调试
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory #SSL连接配置
+
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/part-time-job?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# mybatis-plus配置
+mybatis-plus:
+  # xml文件位置
+  mapper-locations: classpath:com.example.demo.mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 阿里云OSS对象存储
+oss:
+#  配置地域节点Endpoint
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI5t6YRqPBv8vtcS9hymWa
+  accessKeySecret: KSTXeQtQYdHZ4ysx3RVqJh2cN0LQtr
+  bucketName: pic-upload-mhl
+
+
+

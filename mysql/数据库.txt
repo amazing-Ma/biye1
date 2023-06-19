@@ -1,0 +1,125 @@
+CREATE DATABASE `part-time-job` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `part_time_job` (
+  `id` bigint NOT NULL COMMENT '主键id',
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `title` varchar(255) NOT NULL COMMENT '兼职标题',
+  `start_time` date DEFAULT NULL COMMENT '开始日期',
+  `end_time` date DEFAULT NULL COMMENT '兼职结束日期',
+  `job_count` varchar(100) NOT NULL COMMENT '兼职费用',
+  `work_space` varchar(100) DEFAULT NULL COMMENT '工作地点',
+  `job_detail` varchar(255) DEFAULT NULL COMMENT '职位详情',
+  `job_number` int DEFAULT NULL COMMENT '招聘人数',
+  `job_creater` bigint DEFAULT NULL COMMENT '兼职发起者',
+  `state` int DEFAULT NULL COMMENT '状态',
+  `is_deleted` int DEFAULT NULL COMMENT '是否被删除',
+  `job_type` varchar(100) DEFAULT NULL COMMENT '兼职类型',
+  `gender_type` varchar(10) DEFAULT NULL COMMENT '性别要求',
+  `current_progress` int DEFAULT NULL COMMENT '当前进度',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user` (
+  `id` bigint NOT NULL COMMENT '主键',
+  `user_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户你称',
+  `user_passwd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户密码',
+  `user_score` int NOT NULL COMMENT '用户信誉分',
+  `user_level` int NOT NULL COMMENT '用户等级',
+  `user_inter_start_time` time DEFAULT NULL COMMENT '封禁起始时间',
+  `user_inter_date` int DEFAULT NULL COMMENT '封禁天数',
+  `is_deleted` int DEFAULT NULL COMMENT '是否被删除',
+  `state` int DEFAULT NULL COMMENT '状态',
+  `user_pic` varchar(255) DEFAULT NULL COMMENT '用户头像',
+  `create_time` date DEFAULT NULL,
+  `user_number` varchar(100) NOT NULL,
+  `lock_flag` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_base_info` (
+  `id` bigint NOT NULL,
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `true_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user_id` bigint NOT NULL COMMENT '用户id',
+  `sexy_type` varchar(2) DEFAULT NULL COMMENT '性别',
+  `base_city` varchar(100) DEFAULT NULL COMMENT '城市',
+  `birthday` date DEFAULT NULL COMMENT '出生日期',
+  `tall` varchar(100) DEFAULT NULL COMMENT '身高',
+  `edu_state` varchar(10) DEFAULT NULL COMMENT '教育状态',
+  `high_edu` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) NOT NULL,
+  `q_q` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `we_chat` varchar(100) DEFAULT NULL,
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL,
+  `self_introduce` varchar(500) DEFAULT NULL COMMENT '自我评价',
+  `true_pic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `annex` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_card` (
+  `id` bigint NOT NULL,
+  `create_time` date DEFAULT NULL,
+  `card_front` varchar(250) NOT NULL,
+  `card_back` varchar(255) NOT NULL,
+  `user_id` bigint NOT NULL,
+  `user_card_id` varchar(100) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_complaint` (
+  `id` bigint NOT NULL,
+  `create_TIME` date DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  `complaint_title` varchar(100) DEFAULT NULL,
+  `complaint_type` varchar(100) DEFAULT NULL,
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL,
+  `job_id` bigint DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `is_send` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户投诉表';
+
+CREATE TABLE `user_edu_info` (
+  `id` bigint NOT NULL,
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `user_id` bigint NOT NULL,
+  `school` varchar(100) DEFAULT NULL,
+  `major` varchar(100) DEFAULT NULL,
+  `background` varchar(100) DEFAULT NULL,
+  `start_time` date DEFAULT NULL,
+  `end_time` date DEFAULT NULL,
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL,
+  `content` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_job` (
+  `id` bigint NOT NULL COMMENT 'id',
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `user_id` bigint DEFAULT NULL COMMENT '用户id',
+  `job_id` bigint DEFAULT NULL COMMENT '兼职id',
+  `receive_state` int DEFAULT NULL COMMENT '录用状态',
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user_job_info` (
+  `id` bigint NOT NULL COMMENT 'id',
+  `create_time` date DEFAULT NULL COMMENT '创建时间',
+  `user_id` bigint NOT NULL COMMENT '用户id',
+  `company_name` varchar(100) DEFAULT NULL,
+  `job_name` varchar(100) DEFAULT NULL,
+  `job_detail` varchar(500) DEFAULT NULL,
+  `start_time` date DEFAULT NULL,
+  `end_time` date DEFAULT NULL,
+  `state` int DEFAULT NULL,
+  `is_deleted` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
